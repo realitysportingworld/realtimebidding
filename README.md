@@ -1,6 +1,29 @@
 # RTB Auction Engine
 
-A production-grade **Real-Time Bidding (RTB) auction engine** for programmatic advertising. Built to demonstrate distributed systems, low-latency API design, and event-driven architecture.
+A **real-time bidding (RTB) engine** for programmatic advertising, with ML that
+decides what each ad impression is worth. Every bidding claim below is tested
+on **12 million real auctions** from the iPinYou RTB logs, with time-based
+splits, held-out test days and bootstrap confidence intervals.
+
+**Live:** [dashboard](LIVE_DEMO_URL) · [API docs](https://rtb-engine.onrender.com/docs)
+
+## Results at a glance
+
+| | Result | How it was measured |
+|---|---|---|
+| **Expected-value bidding** | **+45% clicks** at the same budget (95% CI +40% to +54%), cost per click −35% | Bid `pCTR × value` against a flat bid, replayed on 3.4M held-out real auctions at half budget |
+| **CTR model** | **AUC 0.803**, calibration error 49% → 11.5% | Logistic regression with user tags, isotonic calibration; beat gradient boosting on the tune day |
+| **First-price bid shading** | **+16% clicks** at the same budget (95% CI +13% to +20%), overpayment 69% → 44% of spend | Win-price curve learned from won/lost outcomes only, against the best fixed-fraction bid |
+| **Bidder throughput** | **125 bids/s, zero lock waits** (from 75 bids/s, 29 of 44 backends waiting) | Budget leasing removed the hot campaign row from the bid path; 4 workers, 10 bids in flight |
+| **Latency** | **27ms p50** server-side per auction, live | Render Frankfurt + Supabase eu-central-1 |
+| **Train/serve parity** | Served models match the notebooks to **~10⁻¹⁴** | 22,745 real requests rescored by the serving code in CI |
+
+**What's in it**
+
+- **OpenRTB 2.5 bidder:** standard bid requests; win, loss and click notices settled exactly once; budgets paced across the day; every bid's features logged for retraining.
+- **ML, offline and served:** CTR models and a bid landscape trained in [notebooks](notebooks/), exported as plain JSON and scored in pure Python at 10–20 µs per request. No scikit-learn on the server.
+- **Honest evaluation:** time-based splits, paired replays, block-bootstrap CIs, a best-in-hindsight robustness check, and a pipeline check that must reproduce earlier published numbers exactly.
+- **Correct money:** single-statement budget writes, reservations that can't overspend across processes, and idempotent notices. 170 tests, run in CI against a real Postgres.
 
 ## Architecture
 
