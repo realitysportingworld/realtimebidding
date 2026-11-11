@@ -33,6 +33,7 @@ Publisher (SSP)  →  Bid Request  →  RTB Engine  →  Auction Result
 - **Targeting** — country, device type, and IAB category filtering
 - **Redis Streams event pipeline** — impression events fire asynchronously, never blocking the auction response
 - **CTR-driven expected-value bidding** — a click-through-rate model trained on real ad data lets campaigns bid `pCTR × value_per_click` instead of a flat CPM (see below)
+- **First-price bid shading** — a win-price curve learned from won/lost outcomes alone picks each bid to maximise expected surplus; +16% clicks at equal budget over the best fixed-fraction bid on real iPinYou auctions (see below)
 - **Live A/B test** — every auction is randomly assigned to flat-CPM (control) or expected-value bidding (treatment); the dashboard compares their cost per click side by side
 - **Live dashboard** — 5-second auto-refresh with auction volume charts, campaign CTR, fill rate KPIs
 
@@ -302,6 +303,69 @@ about 10 µs per request, with no scikit-learn on the server.
   Dataset*](https://arxiv.org/abs/1407.7073), 2014). Bid IDs, user IDs, IPs and
   URLs are removed. Domains were already anonymised in the release.
 
+### Bid shading for first-price auctions
+
+Most programmatic buying moved to first-price auctions around 2019, where the
+winner pays its own bid. Bidding an impression's value then wins it at no
+profit, so a first-price bidder shades: it bids
+`b* = argmax_b (value − b) · P(win | request, b)`.
+[`notebooks/bid-shading.ipynb`](notebooks/bid-shading.ipynb) tests this on the
+same iPinYou auctions. Results are in
+[`notebooks/results/bid_shading_results.json`](notebooks/results/bid_shading_results.json).
+
+- **Simulated first price:** a bid wins when it beats the logged market price
+  (the highest competing bid) and pays itself. This holds the other bidders'
+  behaviour fixed, the standard assumption in offline shading studies.
+- **The bid landscape is learned from won/lost only.** A first-price bidder
+  never sees the price it needed, only whether it won. So each fit-day request
+  gets one exploration bid, log-uniform from 1 to 400 fen and independent of
+  the market price, and one won/lost label. The model is logistic in log bid:
+  `P(win) = σ(a(x) + β(x)·ln b)`, with `a(x)` from the request's features and
+  user tags and the slope `β` per advertiser and exchange. On the tune day it
+  reaches AUC 0.976, and its predicted win rates are off by 0.008 on average
+  (expected calibration error), against 0.956 and 0.022 for a per-advertiser
+  curve that ignores the request.
+- **The optimum is exact.** `ln((v − b)·F(b))` is concave in `b`, so the
+  surplus-maximising bid is unique and a bisection finds it. A brute-force grid
+  check confirms it.
+- **The baseline is tuned, not naive.** The unshaded EV bid gets its own level
+  tuned for first price, which makes it the best *fixed fraction of value*: it
+  ends up bidding about a quarter of the shaded bidder's value scale on every
+  request. Shading has to beat that, by choosing the fraction per request.
+- **Same protocol as the CTR replay:** levels tuned on 10 June, results on
+  11–12 June, a paired block bootstrap over test hours. The notebook also
+  replays the second-price strategies and reproduces the CTR replay's numbers
+  exactly (1,562 and 2,268 clicks at half budget).
+
+**Result.** Clicks at the same budget, contextual shading against the tuned
+fixed-fraction EV bid:
+
+| Budget | Clicks: fixed fraction → shaded | **Click lift** (95% CI) | Cost per click (95% CI) | Overpaid, share of spend | Best levels in hindsight |
+|---|---|---|---|---|---|
+| 1/2  | 1,593 → 1,846 | **+15.9%** (+12.7% to +20.4%) | −11.0% (−14.4% to −8.4%) | 69% → 44% | +15.0% |
+| 1/8  | 1,120 → 1,217 | **+8.7%** (+5.6% to +12.8%)   | −5.0% (−8.5% to −2.4%)   | 56% → 41% | +9.1%  |
+| 1/32 | 558 → 570     | +2.2% (−7.9% to +11.5%)        | −0.9% (−8.0% to +11.2%)  | 49% → 33% | +3.9%  |
+
+"Overpaid" is what wins cost above the price that would have won them. A
+per-advertiser landscape gets about half the gain at half budget (+8.5%), so
+most of it comes from conditioning on the request. At 1/32 the gain isn't
+significant: a budget that small only buys the highest-value impressions, and
+for those a fixed fraction is already close to right. Against a flat first-price
+bid, shaded EV wins +93% clicks at half budget.
+
+**Limitations.** The other bidders are held fixed; in a real market they shade
+too, and prices would move. The logs only contain auctions iPinYou won, as for
+the CTR replay. And the landscape here is trained on iPinYou's features, so like
+the CTR model it serves the replayed requests, not live exchange traffic.
+
+**Serving it.** [`app/ml/shading.py`](backend/app/ml/shading.py) scores the
+exported landscape in the CTR model's layout (reusing its scorer) and runs the
+same bisection, in about 20 µs per request. [`test_bid_shading.py`](backend/tests/test_bid_shading.py)
+reproduces the notebook's curve and shaded bid on 500 real test requests: the
+worst gap in `a(x)` is 7 × 10⁻¹⁵ and the bids match exactly. Each replay in the
+dashboard also shows the request in a first-price auction: both bids, each
+one's win probability, and what a win overpaid.
+
 ## Running Locally
 
 ### Prerequisites
@@ -461,7 +525,7 @@ a page on the site that owns the inventory.
 | `GET` | `/api/v1/analytics/campaigns` | Per-campaign performance |
 | `GET` | `/api/v1/analytics/timeseries` | Auction volume by minute |
 | `GET` | `/api/v1/analytics/ab-comparison` | Flat-CPM vs expected-value bidding, per arm, with a 95% CI on the CPC change |
-| `GET` | `/api/v1/replay/auction` | Replay a real iPinYou request through the served model (`?clicked=true` for a clicked one) |
+| `GET` | `/api/v1/replay/auction` | Replay a real iPinYou request through the served model, under second and first price (`?clicked=true` for a clicked one) |
 | `GET` | `/api/v1/replay/summary` | The served model's version, metrics and offline evaluation |
 | `POST` | `/api/v1/openrtb/2.5/bid` | OpenRTB 2.5 bid request; a bid response, or 204 for no bid |
 | `GET` | `/api/v1/openrtb/win/{bid_id}?price=` | Win notice (`nurl`): charge the clearing price once |

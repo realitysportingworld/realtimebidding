@@ -8,6 +8,7 @@ import { fetchReplaySummary, replayAuction } from '../api'
 // numbers come from the model's own artifact, never from text in this file.
 
 const STRATEGY_LABELS = { flat: 'Flat bid', ev: 'Expected value (pCTR × value)' }
+const FIRST_PRICE_LABELS = { unshaded: 'EV, fixed fraction of value', shaded: 'EV, shaded per request' }
 
 // iPinYou prices are fen per thousand impressions; 100 fen = ¥1.
 const yuan = (fen) => `¥${(fen / 100).toFixed(2)}`
@@ -44,6 +45,7 @@ export default function ReplayPanel() {
 
   const half = summary?.results?.find((r) => r.budget === '1/2')
   const others = summary?.results?.filter((r) => r.budget !== '1/2') ?? []
+  const shadeHalf = summary?.first_price?.results?.find((r) => r.budget === '1/2')
 
   const box = {
     background: 'var(--surface)', border: '1px solid var(--border)',
@@ -91,6 +93,16 @@ export default function ReplayPanel() {
             Model AUC {summary.test_auc.toFixed(3)} · calibration error
             {' '}{pct(summary.calibration_error.raw)} → {pct(summary.calibration_error.calibrated)} after isotonic calibration
           </div>
+          {shadeHalf && (
+            <div style={{ borderTop: '1px solid var(--border)', marginTop: 10, paddingTop: 10 }}>
+              <strong>First-price auctions</strong>, where the winner pays its own bid: shading
+              each bid by a learned win-price curve won{' '}
+              <strong style={{ color: shadeHalf.lift_ci[0] > 0 ? 'var(--green)' : 'var(--text)' }}>
+                {signed(shadeHalf.click_lift)} clicks</strong> over the best fixed-fraction bid
+              (95% CI {signed(shadeHalf.lift_ci[0])} to {signed(shadeHalf.lift_ci[1])}).
+              Overpayment fell from {pct(shadeHalf.unshaded_overpaid_share)} to {pct(shadeHalf.overpaid_share)} of spend.
+            </div>
+          )}
         </div>
       )}
 
@@ -172,6 +184,8 @@ function ReplayResult({ result, fromClicked, label }) {
         </tbody>
       </table>
 
+      {result.first_price && <FirstPrice fp={result.first_price} market={result.market_price} label={label} />}
+
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600 }}>
         {result.clicked
           ? <><CheckCircle size={16} color="var(--green)" /> The user really clicked this ad</>
@@ -182,6 +196,41 @@ function ReplayResult({ result, fromClicked, label }) {
           Drawn from clicked requests on purpose; only about 1 in 1,200 real requests is clicked.
         </div>
       )}
+    </div>
+  )
+}
+
+function FirstPrice({ fp, market, label }) {
+  return (
+    <div>
+      <div style={label}>If this were a first-price auction</div>
+      <div style={{ color: 'var(--muted)', fontSize: 12, margin: '2px 0 6px' }}>
+        The winner pays its own bid. The fixed-fraction bid bids the same share of value on
+        every request; the shaded one picks the bid that maximises (value − bid) × P(win), with
+        P(win) from a curve learned on won/lost outcomes only. Value {yuan(fp.value)} · predicted
+        coin-flip price {yuan(fp.predicted_median_price)}.
+      </div>
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+        <thead>
+          <tr style={{ textAlign: 'left', color: 'var(--muted)', fontSize: 12 }}>
+            <th style={{ padding: '6px 0' }}>Strategy</th><th>Bid (CPM)</th><th>P(win)</th><th>Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          {fp.strategies.map((s) => (
+            <tr key={s.strategy} style={{ borderTop: '1px solid var(--border)' }}>
+              <td style={{ padding: '8px 0' }}>{FIRST_PRICE_LABELS[s.strategy] || s.strategy}</td>
+              <td>{yuan(s.bid)}</td>
+              <td>{pct(s.win_probability)}</td>
+              <td style={{ color: s.won ? 'var(--green)' : 'var(--muted)', fontWeight: 600 }}>
+                {s.won
+                  ? `Won, paid ${yuan(s.paid)} (${yuan(s.overpaid)} over ${yuan(market)})`
+                  : `Lost to ${yuan(market)}`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }

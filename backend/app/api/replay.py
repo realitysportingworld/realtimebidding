@@ -5,14 +5,19 @@ the price that won it and whether the ad was clicked. The served model prices
 it; both bidding strategies bid at the levels tuned on 10 June; each wins when
 it beats the real market price and pays that price. The budgeted replay over
 all 3.4M test auctions is the notebook's job; this shows its unit of work.
+
+With the bid landscape deployed, each replay also shows the same request in a
+first-price auction, where the winner pays its own bid: the unshaded EV bid
+against the shaded one (notebooks/bid-shading.ipynb).
 """
 import functools
+import math
 import random
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.ml import ipinyou
+from app.ml import ipinyou, shading
 
 router = APIRouter()
 
@@ -75,7 +80,35 @@ def replay_auction(
             "mean_for_advertiser": model["bidding"]["advertisers"][advertiser]["mean_pctr"],
         },
         "strategies": strategies,
+        "first_price": _first_price(row, advertiser, calibrated),
         "clicked": row["clicked"],
+    }
+
+
+def _first_price(row: dict, advertiser: str, pctr: float) -> Optional[dict]:
+    win_model = shading.load_win_model()
+    if win_model is None:
+        return None
+    a, beta = shading.curve(win_model, row["features"], row["tags"])
+    bids = shading.first_price_bids(win_model, advertiser, pctr, a, beta)
+    market = row["market_price"]
+    strategies = []
+    for strategy in ("unshaded", "shaded"):
+        bid = bids[strategy]
+        won = bid > market
+        strategies.append({
+            "strategy": strategy, "bid": round(bid, 2),
+            "win_probability": shading.win_probability(a, beta, bid),
+            "won": won, "paid": round(bid, 2) if won else 0,
+            # What the win cost above the price that would have won it.
+            "overpaid": round(bid - market, 2) if won else 0,
+        })
+    return {
+        "model": {"name": win_model["name"], "version": win_model["version"]},
+        "value": round(bids["value"], 2),
+        # The bid at which this request is a coin flip, by the landscape.
+        "predicted_median_price": round(math.exp(-a / beta), 2),
+        "strategies": strategies,
     }
 
 
@@ -100,7 +133,25 @@ def replay_summary():
              "ecpc_change": r["ecpc_change"], "ecpc_ci": r["ecpc_ci"]}
             for r in evaluation["summary"] if r["strategy"] == "ev"
         ],
+        "first_price": _first_price_summary(),
         "sample": {"requests": len(sample),
                    "uniform": sum(r["sampled_as"] == "uniform" for r in sample),
                    "clicked": sum(r["clicked"] for r in sample)},
+    }
+
+
+def _first_price_summary() -> Optional[dict]:
+    win_model = shading.load_win_model()
+    if win_model is None:
+        return None
+    rows = {(r["budget"], r["strategy"]): r for r in win_model["metrics"]["summary"]}
+    return {
+        "model": {"name": win_model["name"], "version": win_model["version"]},
+        "results": [{
+            "budget": budget,
+            "click_lift": r["lift_vs_fp_ev"], "lift_ci": r["lift_vs_fp_ev_ci"],
+            "ecpc_change": r["ecpc_vs_fp_ev"], "ecpc_ci": r["ecpc_vs_fp_ev_ci"],
+            "overpaid_share": r["overpaid_share"],
+            "unshaded_overpaid_share": rows[budget, "fp_ev"]["overpaid_share"],
+        } for (budget, strategy), r in rows.items() if strategy == "fp_shade_ctx"],
     }

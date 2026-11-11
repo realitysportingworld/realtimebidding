@@ -40,12 +40,18 @@ def _sigmoid(z: float) -> float:
 
 
 def raw_ctr(model: dict, features: dict, tags: Iterable[str]) -> float:
-    """The logistic regression's probability, before calibration.
+    """The logistic regression's probability, before calibration."""
+    return _sigmoid(linear_score(model, features, tags))
+
+
+def linear_score(model: dict, features: dict, tags: Iterable[str]) -> float:
+    """Intercept plus the weight of each feature's value and each user tag.
 
     A value the model has a weight for uses it. Anything else, unseen or too
     rare when the model was fitted, falls into the feature's infrequent bucket
     where it has one and contributes nothing where it does not, which is what
-    OneHotEncoder(handle_unknown="infrequent_if_exist") did in training.
+    OneHotEncoder(handle_unknown="infrequent_if_exist") did in training. The
+    bid landscape model (app.ml.shading) is laid out the same way.
     """
     z = model["intercept"]
     for feature in model["features"]:
@@ -57,7 +63,7 @@ def raw_ctr(model: dict, features: dict, tags: Iterable[str]) -> float:
     # A tag listed twice is still one tag, as in the training matrix.
     for tag in set(tags):
         z += tag_weights.get(tag, 0.0)
-    return _sigmoid(z)
+    return z
 
 
 def calibrate(model: dict, p: float) -> float:

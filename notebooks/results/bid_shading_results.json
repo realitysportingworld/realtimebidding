@@ -1,0 +1,1419 @@
+{
+  "version": 1,
+  "data": "iPinYou season 2 (training2nd), 5 advertisers, 6-12 June 2013",
+  "auction": "simulated first price: win when the bid beats the logged market price, pay the bid",
+  "splits": {
+    "fit": [
+      "06",
+      "07",
+      "08",
+      "09"
+    ],
+    "tune": [
+      "10"
+    ],
+    "test": [
+      "11",
+      "12"
+    ]
+  },
+  "ctr_test_auc": 0.8030108290094415,
+  "exploration": {
+    "distribution": "log-uniform",
+    "low": 1.0,
+    "high": 400.0,
+    "fit_win_rate": 0.32952242206982496
+  },
+  "landscapes": [
+    {
+      "landscape": "global",
+      "tune_auc": 0.9557795738300827,
+      "tune_logloss": 0.2508204303477044,
+      "tune_ece": 0.02160246800893572
+    },
+    {
+      "landscape": "ctx",
+      "tune_auc": 0.9760946529819464,
+      "tune_logloss": 0.1843179946162705,
+      "tune_ece": 0.00758970723999174
+    }
+  ],
+  "bootstrap": {
+    "blocks": "test hours",
+    "replicates": 300
+  },
+  "summary": [
+    {
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "clicks": 81,
+      "sp_ev_clicks": 856,
+      "overpaid_share": 0.41053346076775205,
+      "lift_vs_fp_ev": -0.8548387096774194,
+      "lift_vs_fp_ev_ci": [
+        -0.8927791633334902,
+        -0.8052781376652715
+      ],
+      "ecpc_vs_fp_ev": 6.486513221240548,
+      "ecpc_vs_fp_ev_ci": [
+        4.67750444506263,
+        9.03299703096055
+      ],
+      "lift_vs_fp_flat": NaN,
+      "lift_vs_fp_flat_ci": NaN,
+      "ecpc_vs_fp_flat": NaN,
+      "ecpc_vs_fp_flat_ci": NaN
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "clicks": 558,
+      "sp_ev_clicks": 856,
+      "overpaid_share": 0.49060369988475294,
+      "lift_vs_fp_ev": NaN,
+      "lift_vs_fp_ev_ci": NaN,
+      "ecpc_vs_fp_ev": NaN,
+      "ecpc_vs_fp_ev_ci": NaN,
+      "lift_vs_fp_flat": 5.888888888888889,
+      "lift_vs_fp_flat_ci": [
+        4.135531849645141,
+        8.326797194623026
+      ],
+      "ecpc_vs_fp_flat": -0.8664264697799738,
+      "ecpc_vs_fp_flat_ci": [
+        -0.9003262249300009,
+        -0.8238622049442061
+      ]
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "clicks": 578,
+      "sp_ev_clicks": 856,
+      "overpaid_share": 0.3616715373654275,
+      "lift_vs_fp_ev": 0.03584229390680993,
+      "lift_vs_fp_ev_ci": [
+        -0.019461593492488268,
+        0.11432519165626666
+      ],
+      "ecpc_vs_fp_ev": -0.04070172679751882,
+      "ecpc_vs_fp_ev_ci": [
+        -0.10364636191956426,
+        0.028313275407749687
+      ],
+      "lift_vs_fp_flat": 6.135802469135802,
+      "lift_vs_fp_flat_ci": [
+        4.458671182907764,
+        8.791737288135591
+      ],
+      "ecpc_vs_fp_flat": -0.8718631431143694,
+      "ecpc_vs_fp_flat_ci": [
+        -0.9050929583576536,
+        -0.8341315422430101
+      ]
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "clicks": 570,
+      "sp_ev_clicks": 856,
+      "overpaid_share": 0.3255130197517646,
+      "lift_vs_fp_ev": 0.021505376344086002,
+      "lift_vs_fp_ev_ci": [
+        -0.0788030540923825,
+        0.11458787238772782
+      ],
+      "ecpc_vs_fp_ev": -0.008689873652749314,
+      "ecpc_vs_fp_ev_ci": [
+        -0.0801143038264262,
+        0.11220568139861911
+      ],
+      "lift_vs_fp_flat": 6.037037037037037,
+      "lift_vs_fp_flat_ci": [
+        4.235434867016114,
+        8.484238291302109
+      ],
+      "ecpc_vs_fp_flat": -0.8675872068809375,
+      "ecpc_vs_fp_flat_ci": [
+        -0.9020102104909873,
+        -0.8230838461758727
+      ]
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "clicks": 229,
+      "sp_ev_clicks": 1606,
+      "overpaid_share": 0.4316618455317875,
+      "lift_vs_fp_ev": -0.7955357142857142,
+      "lift_vs_fp_ev_ci": [
+        -0.8249565595134665,
+        -0.7609267402593805
+      ],
+      "ecpc_vs_fp_ev": 4.107674276715836,
+      "ecpc_vs_fp_ev_ci": [
+        3.396710900559879,
+        4.910466329171821
+      ],
+      "lift_vs_fp_flat": NaN,
+      "lift_vs_fp_flat_ci": NaN,
+      "ecpc_vs_fp_flat": NaN,
+      "ecpc_vs_fp_flat_ci": NaN
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "clicks": 1120,
+      "sp_ev_clicks": 1606,
+      "overpaid_share": 0.5584734108141828,
+      "lift_vs_fp_ev": NaN,
+      "lift_vs_fp_ev_ci": NaN,
+      "ecpc_vs_fp_ev": NaN,
+      "ecpc_vs_fp_ev_ci": NaN,
+      "lift_vs_fp_flat": 3.890829694323144,
+      "lift_vs_fp_flat_ci": [
+        3.182893070747346,
+        4.712902689522683
+      ],
+      "ecpc_vs_fp_flat": -0.8042161763214497,
+      "ecpc_vs_fp_flat_ci": [
+        -0.830808092320973,
+        -0.7725570854205949
+      ]
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "clicks": 1193,
+      "sp_ev_clicks": 1606,
+      "overpaid_share": 0.43367602550736445,
+      "lift_vs_fp_ev": 0.06517857142857153,
+      "lift_vs_fp_ev_ci": [
+        0.0263666197656012,
+        0.11553534999362493
+      ],
+      "ecpc_vs_fp_ev": -0.022201461520289456,
+      "ecpc_vs_fp_ev_ci": [
+        -0.0758564487490737,
+        0.017091525221116215
+      ],
+      "lift_vs_fp_flat": 4.209606986899563,
+      "lift_vs_fp_flat_ci": [
+        3.467081903025102,
+        5.029166666666665
+      ],
+      "ecpc_vs_fp_flat": -0.8085628633491442,
+      "ecpc_vs_fp_flat_ci": [
+        -0.8365684362631804,
+        -0.7767527619893523
+      ]
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "clicks": 1217,
+      "sp_ev_clicks": 1606,
+      "overpaid_share": 0.41093356748233656,
+      "lift_vs_fp_ev": 0.08660714285714288,
+      "lift_vs_fp_ev_ci": [
+        0.0564825392365992,
+        0.12768342391304344
+      ],
+      "ecpc_vs_fp_ev": -0.05045771769252749,
+      "ecpc_vs_fp_ev_ci": [
+        -0.08481579687960726,
+        -0.02435475945519619
+      ],
+      "lift_vs_fp_flat": 4.314410480349345,
+      "lift_vs_fp_flat_ci": [
+        3.5958095140873825,
+        5.1731023102310205
+      ],
+      "ecpc_vs_fp_flat": -0.8140949812253856,
+      "ecpc_vs_fp_flat_ci": [
+        -0.8406740131427533,
+        -0.7857514122888278
+      ]
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "clicks": 957,
+      "sp_ev_clicks": 2268,
+      "overpaid_share": 0.38217682903061534,
+      "lift_vs_fp_ev": -0.39924670433145004,
+      "lift_vs_fp_ev_ci": [
+        -0.4476747386240125,
+        -0.3626849348943899
+      ],
+      "ecpc_vs_fp_ev": 0.8497226018119763,
+      "ecpc_vs_fp_ev_ci": [
+        0.7313912788121376,
+        0.9939063410365274
+      ],
+      "lift_vs_fp_flat": NaN,
+      "lift_vs_fp_flat_ci": NaN,
+      "ecpc_vs_fp_flat": NaN,
+      "ecpc_vs_fp_flat_ci": NaN
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "clicks": 1593,
+      "sp_ev_clicks": 2268,
+      "overpaid_share": 0.692826344344062,
+      "lift_vs_fp_ev": NaN,
+      "lift_vs_fp_ev_ci": NaN,
+      "ecpc_vs_fp_ev": NaN,
+      "ecpc_vs_fp_ev_ci": NaN,
+      "lift_vs_fp_flat": 0.6645768025078369,
+      "lift_vs_fp_flat_ci": [
+        0.5690828832273264,
+        0.8105375811692558
+      ],
+      "ecpc_vs_fp_flat": -0.4593783959711546,
+      "ecpc_vs_fp_flat_ci": [
+        -0.49847151378667554,
+        -0.42242938722245893
+      ]
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "clicks": 1729,
+      "sp_ev_clicks": 2268,
+      "overpaid_share": 0.47479501667852403,
+      "lift_vs_fp_ev": 0.08537350910232266,
+      "lift_vs_fp_ev_ci": [
+        0.04298668075234069,
+        0.13992262862101967
+      ],
+      "ecpc_vs_fp_ev": -0.08354748388435163,
+      "ecpc_vs_fp_ev_ci": [
+        -0.13944325201029675,
+        -0.037894153165623425
+      ],
+      "lift_vs_fp_flat": 0.806687565308255,
+      "lift_vs_fp_flat_ci": [
+        0.7121193546618585,
+        0.9591282327103222
+      ],
+      "ecpc_vs_fp_flat": -0.5045459707212869,
+      "ecpc_vs_fp_flat_ci": [
+        -0.5411939380898189,
+        -0.46540447996432055
+      ]
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "clicks": 1846,
+      "sp_ev_clicks": 2268,
+      "overpaid_share": 0.44047803484060094,
+      "lift_vs_fp_ev": 0.15881983678593858,
+      "lift_vs_fp_ev_ci": [
+        0.12734842475433103,
+        0.20374714945681888
+      ],
+      "ecpc_vs_fp_ev": -0.11030373629028645,
+      "ecpc_vs_fp_ev_ci": [
+        -0.14392930072826435,
+        -0.08420850218418323
+      ],
+      "lift_vs_fp_flat": 0.9289446185997909,
+      "lift_vs_fp_flat_ci": [
+        0.8237979435378849,
+        1.0804651933701657
+      ],
+      "ecpc_vs_fp_flat": -0.5190109788147841,
+      "ecpc_vs_fp_flat_ci": [
+        -0.5515406443724918,
+        -0.48689650426884973
+      ]
+    }
+  ],
+  "hindsight_clicks": [
+    {
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "clicks": 153
+    },
+    {
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "clicks": 877
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "clicks": 101
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "clicks": 594
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "clicks": 625
+    },
+    {
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "clicks": 617
+    },
+    {
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "clicks": 423
+    },
+    {
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "clicks": 1636
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "clicks": 251
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "clicks": 1185
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "clicks": 1227
+    },
+    {
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "clicks": 1293
+    },
+    {
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "clicks": 1645
+    },
+    {
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "clicks": 2300
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "clicks": 984
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "clicks": 1679
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "clicks": 1792
+    },
+    {
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "clicks": 1931
+    }
+  ],
+  "per_advertiser": [
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "level": 24.0,
+      "imps": 131407,
+      "clicks": 56,
+      "cost": 1893953.0,
+      "overpaid": 0.0,
+      "ecpc": 33820.58928571428
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "level": 12.0,
+      "imps": 48755,
+      "clicks": 334,
+      "cost": 1893914.0,
+      "overpaid": 0.0,
+      "ecpc": 5670.4011976047905
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "level": 20.0,
+      "imps": 94698,
+      "clicks": 37,
+      "cost": 1893960.0,
+      "overpaid": 725170.0,
+      "ecpc": 51188.10810810811
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "level": 11.0,
+      "imps": 29611,
+      "clicks": 228,
+      "cost": 1893967.0339446932,
+      "overpaid": 785042.0339446932,
+      "ecpc": 8306.872955897778
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "level": 26.0,
+      "imps": 42927,
+      "clicks": 228,
+      "cost": 1893908.1443890121,
+      "overpaid": 704656.1443890121,
+      "ecpc": 8306.61466837286
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "level": 18.0,
+      "imps": 41365,
+      "clicks": 221,
+      "cost": 1893941.120025064,
+      "overpaid": 596215.1200250642,
+      "ecpc": 8569.86932138038
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "level": 50.0,
+      "imps": 284845,
+      "clicks": 139,
+      "cost": 6893038.0,
+      "overpaid": 0.0,
+      "ecpc": 49590.20143884892
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "level": 44.0,
+      "imps": 191830,
+      "clicks": 608,
+      "cost": 7539040.0,
+      "overpaid": 0.0,
+      "ecpc": 12399.736842105263
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "level": 39.0,
+      "imps": 194253,
+      "clicks": 92,
+      "cost": 7575867.0,
+      "overpaid": 3805866.0,
+      "ecpc": 82346.38043478261
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "level": 20.0,
+      "imps": 90876,
+      "clicks": 464,
+      "cost": 7575791.041555653,
+      "overpaid": 4169845.0415556533,
+      "ecpc": 16327.135865421667
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "level": 57.0,
+      "imps": 136205,
+      "clicks": 475,
+      "cost": 7575865.026356948,
+      "overpaid": 3355129.026356947,
+      "ecpc": 15949.189529172521
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "level": 50.0,
+      "imps": 130673,
+      "clicks": 483,
+      "cost": 7285358.154752044,
+      "overpaid": 2996054.1547520435,
+      "ecpc": 15083.557256215412
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "level": 82.0,
+      "imps": 616831,
+      "clicks": 466,
+      "cost": 30303490.0,
+      "overpaid": 0.0,
+      "ecpc": 65028.94849785408
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "level": 158.0,
+      "imps": 578465,
+      "clicks": 720,
+      "cost": 28420602.0,
+      "overpaid": 0.0,
+      "ecpc": 39473.058333333334
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 409506,
+      "clicks": 313,
+      "cost": 30303444.0,
+      "overpaid": 11505951.0,
+      "ecpc": 96816.11501597444
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "level": 50.0,
+      "imps": 232237,
+      "clicks": 618,
+      "cost": 27760755.818092827,
+      "overpaid": 18930081.81809282,
+      "ecpc": 44920.31685775538
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "level": 182.0,
+      "imps": 384175,
+      "clicks": 584,
+      "cost": 28513153.65983257,
+      "overpaid": 13245272.65983257,
+      "ecpc": 48823.89325313796
+    },
+    {
+      "advertiser": "1458",
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "level": 182.0,
+      "imps": 396183,
+      "clicks": 635,
+      "cost": 29620913.46422502,
+      "overpaid": 12956005.464225015,
+      "ecpc": 46647.1078176772
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "level": 26.0,
+      "imps": 57954,
+      "clicks": 23,
+      "cost": 962122.0,
+      "overpaid": 0.0,
+      "ecpc": 41831.391304347824
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "level": 16.0,
+      "imps": 17804,
+      "clicks": 68,
+      "cost": 892248.0,
+      "overpaid": 0.0,
+      "ecpc": 13121.29411764706
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "level": 23.0,
+      "imps": 48336,
+      "clicks": 21,
+      "cost": 1111728.0,
+      "overpaid": 381467.0,
+      "ecpc": 52939.42857142857
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "level": 9.0,
+      "imps": 6030,
+      "clicks": 32,
+      "cost": 488314.69258252764,
+      "overpaid": 271825.69258252764,
+      "ecpc": 15259.834143203989
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "level": 26.0,
+      "imps": 11742,
+      "clicks": 40,
+      "cost": 649204.5159212162,
+      "overpaid": 228911.51592121623,
+      "ecpc": 16230.112898030406
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "level": 20.0,
+      "imps": 9870,
+      "clicks": 45,
+      "cost": 576098.1148413254,
+      "overpaid": 213393.11484132544,
+      "ecpc": 12802.180329807232
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "level": 152.0,
+      "imps": 88918,
+      "clicks": 66,
+      "cost": 6981951.0,
+      "overpaid": 0.0,
+      "ecpc": 105787.13636363637
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "level": 70.0,
+      "imps": 88672,
+      "clicks": 193,
+      "cost": 6382490.0,
+      "overpaid": 0.0,
+      "ecpc": 33069.896373056996
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "level": 44.0,
+      "imps": 91260,
+      "clicks": 33,
+      "cost": 4015440.0,
+      "overpaid": 1877765.0,
+      "ecpc": 121680.0
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "level": 20.0,
+      "imps": 27505,
+      "clicks": 85,
+      "cost": 2887813.86665791,
+      "overpaid": 1288202.8666579102,
+      "ecpc": 33974.28078421071
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "level": 74.0,
+      "imps": 48072,
+      "clicks": 103,
+      "cost": 3932138.204048851,
+      "overpaid": 1491289.2040488508,
+      "ecpc": 38176.09906843545
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "level": 57.0,
+      "imps": 47302,
+      "clicks": 106,
+      "cost": 4035548.0993653582,
+      "overpaid": 1386263.0993653582,
+      "ecpc": 38071.20848457885
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "level": 128.0,
+      "imps": 417093,
+      "clicks": 281,
+      "cost": 27927834.0,
+      "overpaid": 0.0,
+      "ecpc": 99387.30960854092
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "level": 302.0,
+      "imps": 314164,
+      "clicks": 350,
+      "cost": 21839310.0,
+      "overpaid": 0.0,
+      "ecpc": 62398.02857142857
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "level": 84.0,
+      "imps": 309384,
+      "clicks": 160,
+      "cost": 25988256.0,
+      "overpaid": 9413383.0,
+      "ecpc": 162426.6
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "level": 57.0,
+      "imps": 75932,
+      "clicks": 173,
+      "cost": 15271548.7586907,
+      "overpaid": 9590410.7586907,
+      "ecpc": 88274.84831613122
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "level": 304.0,
+      "imps": 162745,
+      "clicks": 230,
+      "cost": 17994092.62575366,
+      "overpaid": 8607601.625753658,
+      "ecpc": 78235.18532936374
+    },
+    {
+      "advertiser": "3358",
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "level": 235.0,
+      "imps": 154444,
+      "clicks": 258,
+      "cost": 17007746.178438887,
+      "overpaid": 7307278.178438886,
+      "ecpc": 65921.4968156546
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "level": 296.0,
+      "imps": 24782,
+      "clicks": 22,
+      "cost": 2010837.0,
+      "overpaid": 0.0,
+      "ecpc": 91401.68181818182
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "level": 14.0,
+      "imps": 48976,
+      "clicks": 123,
+      "cost": 2010801.0,
+      "overpaid": 0.0,
+      "ecpc": 16347.975609756097
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "level": 50.0,
+      "imps": 40216,
+      "clicks": 5,
+      "cost": 2010800.0,
+      "overpaid": 1036013.0,
+      "ecpc": 402160.0
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "level": 9.0,
+      "imps": 24170,
+      "clicks": 100,
+      "cost": 2007353.2779892893,
+      "overpaid": 1114812.2779892893,
+      "ecpc": 20073.532779892892
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "level": 23.0,
+      "imps": 43829,
+      "clicks": 91,
+      "cost": 1800827.7882965407,
+      "overpaid": 687748.7882965406,
+      "ecpc": 19789.31635490704
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "level": 20.0,
+      "imps": 34651,
+      "clicks": 92,
+      "cost": 2010840.318191487,
+      "overpaid": 670075.318191487,
+      "ecpc": 21856.95998034225
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "level": 172.0,
+      "imps": 130772,
+      "clicks": 90,
+      "cost": 8043362.0,
+      "overpaid": 0.0,
+      "ecpc": 89370.6888888889
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "level": 50.0,
+      "imps": 169127,
+      "clicks": 236,
+      "cost": 7889711.0,
+      "overpaid": 0.0,
+      "ecpc": 33430.97881355932
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 108694,
+      "clicks": 38,
+      "cost": 8043356.0,
+      "overpaid": 3255632.0,
+      "ecpc": 211667.26315789475
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "level": 23.0,
+      "imps": 63243,
+      "clicks": 144,
+      "cost": 8043190.580708074,
+      "overpaid": 5105746.580708074,
+      "ecpc": 55855.49014380607
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "level": 74.0,
+      "imps": 131416,
+      "clicks": 173,
+      "cost": 8043351.666320354,
+      "overpaid": 3677155.6663203533,
+      "ecpc": 46493.36223306563
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "level": 65.0,
+      "imps": 109900,
+      "clicks": 165,
+      "cost": 8043174.7110002,
+      "overpaid": 3626437.7110002013,
+      "ecpc": 48746.51340000121
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "level": 108.0,
+      "imps": 602226,
+      "clicks": 371,
+      "cost": 32173461.0,
+      "overpaid": 0.0,
+      "ecpc": 86720.9191374663
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "level": 182.0,
+      "imps": 546028,
+      "clicks": 472,
+      "cost": 32173401.0,
+      "overpaid": 0.0,
+      "ecpc": 68163.98516949153
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 434776,
+      "clicks": 198,
+      "cost": 32173424.0,
+      "overpaid": 12218909.0,
+      "ecpc": 162492.0404040404
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "level": 65.0,
+      "imps": 193155,
+      "clicks": 222,
+      "cost": 32173385.63288489,
+      "overpaid": 23306817.63288489,
+      "ecpc": 144925.1605084905
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "level": 235.0,
+      "imps": 348586,
+      "clicks": 313,
+      "cost": 29789257.904124256,
+      "overpaid": 14364760.904124275,
+      "ecpc": 95173.34793649922
+    },
+    {
+      "advertiser": "3386",
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "level": 235.0,
+      "imps": 343877,
+      "clicks": 339,
+      "cost": 32173372.34351141,
+      "overpaid": 14510639.34351141,
+      "ecpc": 94906.70307820475
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "level": 124.0,
+      "imps": 32642,
+      "clicks": 19,
+      "cost": 1955347.0,
+      "overpaid": 0.0,
+      "ecpc": 102913.0
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "level": 14.0,
+      "imps": 45075,
+      "clicks": 255,
+      "cost": 1955381.0,
+      "overpaid": 0.0,
+      "ecpc": 7668.160784313725
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "level": 23.0,
+      "imps": 85017,
+      "clicks": 14,
+      "cost": 1955391.0,
+      "overpaid": 749615.0,
+      "ecpc": 139670.7857142857
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "level": 12.0,
+      "imps": 22368,
+      "clicks": 155,
+      "cost": 1955370.213614686,
+      "overpaid": 1054843.213614686,
+      "ecpc": 12615.29170073991
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "level": 26.0,
+      "imps": 46319,
+      "clicks": 175,
+      "cost": 1955398.2005587835,
+      "overpaid": 708634.2005587831,
+      "ecpc": 11173.704003193048
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "level": 23.0,
+      "imps": 37188,
+      "clicks": 165,
+      "cost": 1955360.4429712472,
+      "overpaid": 637830.4429712472,
+      "ecpc": 11850.669351340892
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "level": 110.0,
+      "imps": 134974,
+      "clicks": 74,
+      "cost": 7821605.0,
+      "overpaid": 0.0,
+      "ecpc": 105697.36486486487
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "level": 56.0,
+      "imps": 167783,
+      "clicks": 424,
+      "cost": 7821552.0,
+      "overpaid": 0.0,
+      "ecpc": 18447.056603773584
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "level": 95.0,
+      "imps": 82332,
+      "clicks": 45,
+      "cost": 7821540.0,
+      "overpaid": 3183407.0,
+      "ecpc": 173812.0
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "level": 23.0,
+      "imps": 75074,
+      "clicks": 316,
+      "cost": 7821606.648940893,
+      "overpaid": 4536409.648940893,
+      "ecpc": 24751.91977512941
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "level": 74.0,
+      "imps": 125248,
+      "clicks": 330,
+      "cost": 7821580.337489617,
+      "overpaid": 3493299.3374896175,
+      "ecpc": 23701.758598453383
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "level": 65.0,
+      "imps": 109863,
+      "clicks": 347,
+      "cost": 7821502.085544659,
+      "overpaid": 3321518.085544658,
+      "ecpc": 22540.351831540804
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "level": 90.0,
+      "imps": 572953,
+      "clicks": 300,
+      "cost": 31286399.0,
+      "overpaid": 0.0,
+      "ecpc": 104287.99666666667
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "level": 204.0,
+      "imps": 514520,
+      "clicks": 533,
+      "cost": 31286388.0,
+      "overpaid": 0.0,
+      "ecpc": 58698.66416510319
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "level": 95.0,
+      "imps": 329331,
+      "clicks": 179,
+      "cost": 31286445.0,
+      "overpaid": 13233854.0,
+      "ecpc": 174784.6089385475
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "level": 65.0,
+      "imps": 184409,
+      "clicks": 420,
+      "cost": 31286242.955374084,
+      "overpaid": 22251487.955374084,
+      "ecpc": 74491.05465565258
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "level": 235.0,
+      "imps": 323351,
+      "clicks": 440,
+      "cost": 29419197.36351082,
+      "overpaid": 14191874.363510823,
+      "ecpc": 66861.81218979732
+    },
+    {
+      "advertiser": "3427",
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "level": 235.0,
+      "imps": 326304,
+      "clicks": 445,
+      "cost": 31286399.29551677,
+      "overpaid": 13745651.29551676,
+      "ecpc": 70306.51527082421
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "sp_flat",
+      "level": 90.0,
+      "imps": 17256,
+      "clicks": 7,
+      "cost": 880560.0,
+      "overpaid": 0.0,
+      "ecpc": 125794.28571428571
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "sp_ev",
+      "level": 14.0,
+      "imps": 20898,
+      "clicks": 76,
+      "cost": 880495.0,
+      "overpaid": 0.0,
+      "ecpc": 11585.46052631579
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 11899,
+      "clicks": 4,
+      "cost": 880526.0,
+      "overpaid": 331410.0,
+      "ecpc": 220131.5
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "fp_ev",
+      "level": 14.0,
+      "imps": 13266,
+      "clicks": 43,
+      "cost": 880567.4826663444,
+      "overpaid": 318369.4826663444,
+      "ecpc": 20478.313550380102
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "fp_shade_global",
+      "level": 30.0,
+      "imps": 17602,
+      "clicks": 44,
+      "cost": 880580.888001852,
+      "overpaid": 266821.8880018519,
+      "ecpc": 20013.20200004209
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/32",
+      "strategy": "fp_shade_ctx",
+      "level": 20.0,
+      "imps": 16869,
+      "clicks": 47,
+      "cost": 880581.7433374481,
+      "overpaid": 264206.74333744816,
+      "ecpc": 18735.781773137194
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "sp_flat",
+      "level": 90.0,
+      "imps": 65822,
+      "clicks": 37,
+      "cost": 3522358.0,
+      "overpaid": 0.0,
+      "ecpc": 95198.86486486487
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "sp_ev",
+      "level": 42.0,
+      "imps": 70365,
+      "clicks": 145,
+      "cost": 3522311.0,
+      "overpaid": 0.0,
+      "ecpc": 24291.8
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 47599,
+      "clicks": 21,
+      "cost": 3522326.0,
+      "overpaid": 1249579.0,
+      "ecpc": 167729.80952380953
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "fp_ev",
+      "level": 20.0,
+      "imps": 40862,
+      "clicks": 111,
+      "cost": 3334943.9001447987,
+      "overpaid": 1465985.9001447984,
+      "ecpc": 30044.53964094413
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "fp_shade_global",
+      "level": 57.0,
+      "imps": 54295,
+      "clicks": 112,
+      "cost": 3522331.0586780794,
+      "overpaid": 1381663.0586780799,
+      "ecpc": 31449.384452482853
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/8",
+      "strategy": "fp_shade_ctx",
+      "level": 44.0,
+      "imps": 48891,
+      "clicks": 116,
+      "cost": 3420447.109542791,
+      "overpaid": 1246772.1095427906,
+      "ecpc": 29486.61301329992
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "sp_flat",
+      "level": 86.0,
+      "imps": 264474,
+      "clicks": 144,
+      "cost": 14089500.0,
+      "overpaid": 0.0,
+      "ecpc": 97843.75
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "sp_ev",
+      "level": 192.0,
+      "imps": 240456,
+      "clicks": 193,
+      "cost": 14089498.0,
+      "overpaid": 0.0,
+      "ecpc": 73002.58031088083
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "fp_flat",
+      "level": 74.0,
+      "imps": 190398,
+      "clicks": 107,
+      "cost": 14089452.0,
+      "overpaid": 4778840.0,
+      "ecpc": 131677.1214953271
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "fp_ev",
+      "level": 57.0,
+      "imps": 88655,
+      "clicks": 160,
+      "cost": 13952428.904341282,
+      "overpaid": 9368228.904341282,
+      "ecpc": 87202.68065213301
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "fp_shade_global",
+      "level": 207.0,
+      "imps": 158228,
+      "clicks": 162,
+      "cost": 14089496.41361803,
+      "overpaid": 6473401.413618031,
+      "ecpc": 86972.20008406191
+    },
+    {
+      "advertiser": "3476",
+      "budget": "1/2",
+      "strategy": "fp_shade_ctx",
+      "level": 182.0,
+      "imps": 152688,
+      "clicks": 169,
+      "cost": 14089426.472661104,
+      "overpaid": 6178044.472661104,
+      "ecpc": 83369.38741219588
+    }
+  ]
+}
